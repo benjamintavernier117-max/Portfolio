@@ -1188,7 +1188,7 @@ h1 > span:not(.hero-period) { color: var(--accent); }
 </div>
 </section>
 </main>
-<footer class="site-footer"><div class="container footer-layout"><div><strong>Tavernier Benjamin</strong><span>Portfolio BTS SIO · SISR</span></div><p>Conçu pour apprendre, documenter, progresser.</p><a class="back-top" href="#haut">Retour en haut <span aria-hidden="true">↑</span></a></div><div class="container footer-bottom"><span>© <span id="currentYear">2026</span> · Portfolio professionnel</span><span>BUILT WITH HTML / CSS / JS <span aria-hidden="true">✳</span></span></div></footer>
+<footer class="site-footer"><div class="container footer-layout"><div><strong>Tavernier Benjamin</strong><span>Portfolio BTS SIO · SISR</span></div><p>Conçu pour apprendre, documenter, progresser.</p><a class="back-top" href="#accueil">Retour en haut <span aria-hidden="true">↑</span></a></div><div class="container footer-bottom"><span>© <span id="currentYear">2026</span> · Portfolio professionnel</span><span>BUILT WITH HTML / CSS / JS <span aria-hidden="true">✳</span></span></div></footer>
 <div aria-atomic="true" aria-live="polite" class="toast" hidden="" id="feedbackToast" role="status"><span class="toast-symbol">✎</span><span class="toast-message" id="toastMessage"></span><button aria-label="Fermer le message" class="toast-close" id="toastClose" type="button">×</button></div>
 <script>
 /* ===============================================================
@@ -1225,6 +1225,17 @@ h1 > span:not(.hero-period) { color: var(--accent); }
   // Une première visite démarre en sombre. L'utilisateur peut passer en clair.
   setTheme(savedTheme === 'light' ? 'light' : 'dark');
   themeToggle.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+  // BOUTON « RETOUR EN HAUT » : ramène réellement au début de la page.
+  // L'ancre #accueil reste utilisable même lorsque JavaScript est désactivé.
+  const backToTop = document.querySelector('.back-top');
+  if (backToTop) {
+    backToTop.addEventListener('click', event => {
+      event.preventDefault();
+      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      window.scrollTo({ top: 0, left: 0, behavior });
+    });
+  }
 
   // NAVIGATION MOBILE
   function closeMenu() {
